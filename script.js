@@ -27,3 +27,26 @@ function initSmoothScroll() {
         });
     });
 }
+
+function initFormValidation() {
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (!feedbackForm) return;
+
+    feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nameInput = this.querySelector('input[type="text"]');
+        const emailInput = this.querySelector('input[type="email"]');
+        const messageInput = this.querySelector('textarea');
+
+        let isValid = true;
+
+        if (!nameInput.value.trim()) {
+            showError(nameInput, 'Please enter your name');
+            isValid = false;
+        } else {
+            clearError(nameInput);
+        }
+
+    });
+}
