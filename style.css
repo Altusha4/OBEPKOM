@@ -372,3 +372,39 @@ body {
         padding: 20px;
     }
 }
+.equipment-container {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.equipment-container p {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.equipment-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.equipment-item h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.equipment-item p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+    text-align: left;
+}
