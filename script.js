@@ -50,3 +50,26 @@ function initFormValidation() {
 
     });
 }
+function showError(inputElement, message) {
+    clearError(inputElement);
+
+    inputElement.classList.add('error');
+
+    const errorElement = document.createElement('div');
+    errorElement.className = 'error-message';
+    errorElement.textContent = message;
+    errorElement.style.color = '#e74c3c';
+    errorElement.style.fontSize = '14px';
+    errorElement.style.marginTop = '5px';
+
+    inputElement.parentNode.insertBefore(errorElement, inputElement.nextSibling);
+}
+function clearError(inputElement) {
+    // Remove error class
+    inputElement.classList.remove('error');
+
+    const errorElement = inputElement.nextElementSibling;
+    if (errorElement && errorElement.className === 'error-message') {
+        errorElement.remove();
+    }
+}
