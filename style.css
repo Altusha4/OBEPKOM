@@ -21,6 +21,10 @@ body {
     background-color: #2c3e50;
     color: white;
     padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 .header .container {
@@ -55,8 +59,10 @@ body {
     transition: background-color 0.3s;
 }
 
-.nav-menu li a:hover {
-    background-color: rgba(255,255,255,0.1);
+.nav-menu li a:hover,
+.nav-menu li a.active {
+    background-color: #3498db;
+    color: white;
 }
 
 .search-box {
@@ -90,7 +96,7 @@ body {
     background-color: #3498db;
     color: white;
     padding: 30px 0;
-    margin: 20px 0;
+    margin: 100px 0 20px;
 }
 
 .contact-banner h2 {
@@ -374,6 +380,13 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+#feedbackForm input.error,
+#feedbackForm textarea.error {
+    border-color: #e74c3c;
+    border-width: 2px;
 }
 
 #feedbackForm button {
@@ -383,6 +396,20 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#feedbackForm button:hover {
+    background-color: #2980b9;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-style: italic;
 }
 
 .footer {
