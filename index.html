@@ -3,208 +3,224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ТОО "ОВЕРКОМ" - Услуги для добывающей промышленности</title>
+  <title>ТОО "ОВЕРКОМ" | Промышленные решения</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header class="header">
-  <div class="container">
+  <div class="container header-flex">
     <div class="logo">
-      <h1>ТОО "ОВЕРКОМ"</h1>
-      <p class="subtitle">Услуги для добывающей промышленности</p>
+      <span class="logo-accent">OVER</span>COM
+      <p class="subtitle">Mining Services</p>
     </div>
 
     <nav class="navbar">
       <ul class="nav-menu">
-        <li><a href="#about">О КОМПАНИИ</a></li>
-        <li><a href="#services">УСЛУГИ</a></li>
-        <li><a href="#gallery">ФОТОГАЛЕРЕЯ</a></li>
-        <li><a href="#clients">КЛИЕНТЫ</a></li>
-        <li><a href="#equipment">ТЕХНИКА</a></li>
-        <li><a href="#contacts">КОНТАКТЫ</a></li>
+        <li><a href="#about" class="nav-link">О КОМПАНИИ</a></li>
+        <li><a href="#services" class="nav-link">УСЛУГИ</a></li>
+        <li><a href="#gallery" class="nav-link">ГАЛЕРЕЯ</a></li>
+        <li><a href="#equipment" class="nav-link">ТЕХНИКА</a></li>
+        <li><a href="#contacts" class="nav-link">КОНТАКТЫ</a></li>
       </ul>
-      <div class="search-box">
-        <input type="text" placeholder="Поиск">
-        <button>Найти</button>
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
       </div>
     </nav>
+
+    <div class="header-actions">
+      <a href="tel:+77212000000" class="phone-link"><i class="fas fa-phone"></i> +7 (7212) XX-XX-XX</a>
+    </div>
   </div>
 </header>
 
-<main class="main-content">
-  <section class="contact-banner">
-    <div class="container">
-      <h2>НАПИСАТЬ НАМ</h2>
-      <div class="contact-info">
-        <h3>ТОО "ОВЕРКОМ"</h3>
-        <p>+7 (7212) XX-XX-XX</p>
-        <p>г. Караганда, пр. Шахтеров, д. 25, оф. 97</p>
+<main>
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1>Надежный партнер в <br><span>добывающей промышленности</span></h1>
+      <p>Комплексные геологоразведочные, буровые и взрывные работы на территории Казахстана с 2011 года.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn btn-primary">Наши услуги</a>
+        <a href="#contacts" class="btn btn-outline">Связаться с нами</a>
       </div>
     </div>
   </section>
 
-  <section id="about" class="company-section">
-    <div class="container">
-      <h2>О компании ТОО "ОВЕРКОМ"</h2>
-
-      <div class="company-details">
-        <p><strong>БИН:</strong> 110940013948</p>
-        <p><strong>Дата регистрации:</strong> 20.09.2011 года</p>
-        <p><strong>ОКЭД:</strong> 09900 - Предоставление услуг, способствующих добыче других полезных ископаемых</p>
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <span class="stat-number">12+</span>
+        <span class="stat-text">Лет на рынке</span>
       </div>
-
-      <div class="company-description">
-        <p>Компания ТОО "ОВЕРКОМ" зарегистрирована 20.09.2011 года. Основным видом деятельности является Предоставление услуг, способствующих добыче других полезных ископаемых.</p>
+      <div class="stat-item">
+        <span class="stat-number">100+</span>
+        <span class="stat-text">Объектов</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">24/7</span>
+        <span class="stat-text">Поддержка</span>
       </div>
     </div>
   </section>
 
-  <section id="services" class="company-section">
+  <section id="about" class="section about-section">
     <div class="container">
-      <h2>УСЛУГИ</h2>
+      <div class="section-header">
+        <span class="pre-title">О нас</span>
+        <h2>ТОО "ОВЕРКОМ"</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="lead">Мы специализируемся на предоставлении высокотехнологичных услуг, способствующих эффективной добыче полезных ископаемых.</p>
+          <p>Зарегистрированная в 2011 году в Караганде, наша компания прошла путь от малого предприятия до надежного подрядчика для крупнейших недропользователей региона.</p>
+
+          <div class="legal-info">
+            <div class="legal-card"><strong>БИН</strong> 110940013948</div>
+            <div class="legal-card"><strong>ОКЭД</strong> 09900</div>
+          </div>
+        </div>
+        <div class="about-image">
+          <div class="image-stack-card"></div>
+          <div class="image-placeholder-main"><i class="fas fa-industry fa-4x"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section services-section bg-light">
+    <div class="container">
+      <div class="section-header center">
+        <span class="pre-title">Что мы делаем</span>
+        <h2>Наши Услуги</h2>
+      </div>
+
       <div class="services-grid">
         <div class="service-card">
-          <h3>Геологоразведочные работы</h3>
-          <p>Комплексные исследования для поиска и оценки месторождений полезных ископаемых</p>
+          <div class="service-icon"><i class="fas fa-mountain"></i></div>
+          <h3>Геологоразведка</h3>
+          <p>Комплексные исследования для поиска и детальной оценки месторождений.</p>
         </div>
         <div class="service-card">
+          <div class="service-icon"><i class="fas fa-tools"></i></div>
           <h3>Буровые работы</h3>
-          <p>Выполнение буровых работ различной сложности и глубины</p>
+          <p>Бурение скважин любой сложности с использованием современного оборудования.</p>
         </div>
         <div class="service-card">
+          <div class="service-icon"><i class="fas fa-bomb"></i></div>
           <h3>Взрывные работы</h3>
-          <p>Проведение взрывных работ при добыче полезных ископаемых</p>
+          <p>Безопасное и точное проведение взрывных работ на карьерах и шахтах.</p>
         </div>
         <div class="service-card">
-          <h3>Консультационные услуги</h3>
-          <p>Профессиональные консультации в сфере добывающей промышленности</p>
+          <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
+          <h3>Консалтинг</h3>
+          <p>Профессиональное сопровождение проектов в горнорудной сфере.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="gallery" class="company-section">
+  <section id="gallery" class="section gallery-section">
     <div class="container">
-      <h2>ФОТОГАЛЕРЕЯ</h2>
-      <div class="gallery-container">
-        <p class="gallery-description">Здесь будут представлены фотографии наших работ, техники и объектов</p>
-        <div class="gallery-grid">
-          <div class="gallery-item">
-            <div class="image-placeholder">Фото 1</div>
-            <p class="image-caption">Наши работы на объекте</p>
-          </div>
-          <div class="gallery-item">
-            <div class="image-placeholder">Фото 2</div>
-            <p class="image-caption">Спецтехника в работе</p>
-          </div>
-          <div class="gallery-item">
-            <div class="image-placeholder">Фото 3</div>
-            <p class="image-caption">Геодезические измерения</p>
-          </div>
+      <div class="section-header">
+        <h2>Фотогалерея</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="img-box"><span>Объект 1</span></div>
+          <div class="gallery-info"><h4>Горные разработки</h4></div>
+        </div>
+        <div class="gallery-item">
+          <div class="img-box"><span>Объект 2</span></div>
+          <div class="gallery-info"><h4>Спецтехника</h4></div>
+        </div>
+        <div class="gallery-item">
+          <div class="img-box"><span>Объект 3</span></div>
+          <div class="gallery-info"><h4>Полевые работы</h4></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="clients" class="company-section">
+  <section id="equipment" class="section equipment-section bg-dark">
     <div class="container">
-      <h2>КЛИЕНТЫ</h2>
-      <div class="clients-container">
-        <p class="clients-intro">Мы гордимся сотрудничеством с ведущими предприятиями добывающей промышленности Казахстана</p>
-
-        <div class="clients-grid">
-          <div class="client-category">
-            <h3>Горнодобывающие компании</h3>
-            <ul>
-              <li>Предприятия по добыче угля</li>
-              <li>Рудодобывающие компании</li>
-              <li>Карьеры по добыче нерудных материалов</li>
-            </ul>
-          </div>
-
-          <div class="client-category">
-            <h3>Промышленные предприятия</h3>
-            <ul>
-              <li>Металлургические заводы</li>
-              <li>Обогатительные фабрики</li>
-              <li>Химические предприятия</li>
-            </ul>
-          </div>
-
-          <div class="client-category">
-            <h3>Строительные организации</h3>
-            <ul>
-              <li>Компании по строительству дорог</li>
-              <li>Застройщики промышленных объектов</li>
-              <li>Инфраструктурные проекты</li>
-            </ul>
-          </div>
+      <div class="section-header light">
+        <h2>Техническое оснащение</h2>
+      </div>
+      <div class="equipment-grid">
+        <div class="eq-item">
+          <i class="fas fa-truck-monster"></i>
+          <h4>Буровые установки</h4>
+          <p>Установки высокого давления для твердых пород.</p>
+        </div>
+        <div class="eq-item">
+          <i class="fas fa-compass"></i>
+          <h4>Геодезия</h4>
+          <p>Высокоточные GPS-системы и лазерные сканеры.</p>
+        </div>
+        <div class="eq-item">
+          <i class="fas fa-flask"></i>
+          <h4>Лаборатория</h4>
+          <p>Собственный мобильный комплекс экспресс-анализа.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="equipment" class="company-section">
+  <section id="contacts" class="section contact-section">
     <div class="container">
-      <h2>ТЕХНИКА</h2>
-      <div class="equipment-container">
-        <p>Современный парк специализированной техники для выполнения работ любой сложности</p>
-        <div class="equipment-grid">
-          <div class="equipment-item">
-            <h3>Буровые установки</h3>
-            <p>Мощное оборудование для геологоразведки различных типов и глубины</p>
-          </div>
-          <div class="equipment-item">
-            <h3>Спецтранспорт</h3>
-            <p>Транспорт для перевозки оборудования и материалов по бездорожью</p>
-          </div>
-          <div class="equipment-item">
-            <h3>Геодезическое оборудование</h3>
-            <p>Точные приборы для измерения и картографирования</p>
-          </div>
-          <div class="equipment-item">
-            <h3>Лабораторное оборудование</h3>
-            <p>Анализ и исследование образцов горных пород</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contacts" class="company-section">
-    <div class="container">
-      <h2>КОНТАКТЫ</h2>
-      <div class="contacts-container">
-        <div class="contacts-grid">
-          <div class="contact-info">
-            <h3>Контактная информация</h3>
-            <p><strong>Адрес:</strong> г. Караганда, пр. Шахтеров, д. 25, оф. 97</p>
-            <p><strong>Телефон:</strong> +7 (7212) XX-XX-XX</p>
-            <p><strong>Email:</strong> info@overcom.kz</p>
-            <p><strong>Режим работы:</strong> Пн-Пт: 9:00-18:00</p>
-          </div>
-
-          <div class="contact-form">
-            <h3>Написать нам</h3>
-            <form id="feedbackForm">
+      <div class="contact-box">
+        <div class="contact-form-side">
+          <h3>Связаться с нами</h3>
+          <form id="feedbackForm">
+            <div class="form-group">
               <input type="text" placeholder="Ваше имя" required>
-              <input type="email" placeholder="Ваш email" required>
-              <textarea placeholder="Ваше сообщение" rows="4" required></textarea>
-              <button type="submit">Отправить</button>
-            </form>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="Ваш Email" required>
+            </div>
+            <div class="form-group">
+              <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary full-width">Отправить запрос</button>
+          </form>
+        </div>
+        <div class="contact-info-side">
+          <h3>Контакты</h3>
+          <div class="info-link">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>Казахстан, г. Караганда,<br>пр. Шахтеров, д. 25, оф. 97</p>
+          </div>
+          <div class="info-link">
+            <i class="fas fa-envelope"></i>
+            <p>info@overcom.kz</p>
+          </div>
+          <div class="info-link">
+            <i class="fas fa-clock"></i>
+            <p>Пн — Пт: 09:00 - 18:00</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 </main>
+
 <footer class="footer">
   <div class="container">
-    <p>© 2025 ТОО "ОВЕРКОМ". Все права защищены.</p>
-    <p>БИН: 110940013948 | ОКЭД: 09900</p>
-    <p>г. Караганда, пр. Шахтеров, д. 25, оф. 97</p>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ТОО "ОВЕРКОМ". Все права защищены. БИН: 110940013948</p>
+    </div>
   </div>
 </footer>
+
 <script src="script.js"></script>
 </body>
 </html>

@@ -1,29 +1,73 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('ТОО "ОВЕРКОМ" website loaded successfully');
+    console.log('ТОО "ОВЕРКОМ" — Визуальное обновление активировано');
 
+    initMobileMenu();
+    initHeaderScroll();
     initSmoothScroll();
+    initScrollReveal();
     initFormValidation();
     initNavHighlight();
-    initSearchFunctionality();
 });
 
+/**
+ * 1. Мобильное меню (Бургер)
+ */
+function initMobileMenu() {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const menu = document.querySelector('.nav-menu');
+
+    if (!toggle) return;
+
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+        // Меняем иконку с баров на крестик
+        const icon = toggle.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    // Закрываем меню при клике на ссылку
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.remove('active');
+            const icon = toggle.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+        });
+    });
+}
+
+/**
+ * 2. Эффекты шапки при скролле
+ */
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.padding = '10px 0';
+            header.style.backgroundColor = 'rgba(26, 42, 58, 0.98)';
+        } else {
+            header.style.padding = '15px 0';
+            header.style.backgroundColor = 'rgba(26, 42, 58, 0.95)';
+        }
+    });
+}
+
+/**
+ * 3. Плавный скролл к секциям
+ */
 function initSmoothScroll() {
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-
             const targetElement = document.querySelector(targetId);
+
             if (targetElement) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
-
                 window.scrollTo({
-                    top: targetPosition,
+                    top: targetElement.offsetTop - headerHeight,
                     behavior: 'smooth'
                 });
             }
@@ -31,141 +75,96 @@ function initSmoothScroll() {
     });
 }
 
-function initFormValidation() {
-    const feedbackForm = document.getElementById('feedbackForm');
-    if (!feedbackForm) return;
+/**
+ * 4. Анимация появления блоков при скролле (Scroll Reveal)
+ */
+function initScrollReveal() {
+    const observerOptions = {
+        threshold: 0.1
+    };
 
-    feedbackForm.addEventListener('submit', function(e) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Применяем к карточкам и секциям
+    const animatedElements = document.querySelectorAll('.service-card, .section-header, .about-grid, .stat-item');
+
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        observer.observe(el);
+    });
+}
+
+/**
+ * 5. Валидация формы
+ */
+function initFormValidation() {
+    const form = document.getElementById('feedbackForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const nameInput = this.querySelector('input[type="text"]');
-        const emailInput = this.querySelector('input[type="email"]');
-        const messageInput = this.querySelector('textarea');
+        const inputs = form.querySelectorAll('input, textarea');
+        let isFormValid = true;
 
-        let isValid = true;
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.style.borderColor = '#e74c3c';
+                isFormValid = false;
+            } else {
+                input.style.borderColor = '#ddd';
+            }
+        });
 
-        if (!nameInput.value.trim()) {
-            showError(nameInput, 'Пожалуйста, введите ваше имя');
-            isValid = false;
-        } else {
-            clearError(nameInput);
-        }
+        if (isFormValid) {
+            const btn = form.querySelector('button');
+            const originalText = btn.textContent;
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailInput.value.trim()) {
-            showError(emailInput, 'Пожалуйста, введите ваш email');
-            isValid = false;
-        } else if (!emailRegex.test(emailInput.value)) {
-            showError(emailInput, 'Пожалуйста, введите корректный email');
-            isValid = false;
-        } else {
-            clearError(emailInput);
-        }
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
 
-        if (!messageInput.value.trim()) {
-            showError(messageInput, 'Пожалуйста, введите ваше сообщение');
-            isValid = false;
-        } else {
-            clearError(messageInput);
-        }
-
-        if (isValid) {
-            alert('Спасибо! Ваше сообщение отправлено.\n\n(В реальном проекте форма будет подключена к бекенду)');
-
-            this.reset();
+            setTimeout(() => {
+                alert('Благодарим за обращение! Наши специалисты свяжутся с вами в ближайшее время.');
+                form.reset();
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }, 1500);
         }
     });
 }
-function showError(inputElement, message) {
-    clearError(inputElement);
 
-    inputElement.classList.add('error');
-
-    const errorElement = document.createElement('div');
-    errorElement.className = 'error-message';
-    errorElement.textContent = message;
-
-    inputElement.parentNode.insertBefore(errorElement, inputElement.nextSibling);
-}
-function clearError(inputElement) {
-    inputElement.classList.remove('error');
-
-    const errorElement = inputElement.nextElementSibling;
-    if (errorElement && errorElement.className === 'error-message') {
-        errorElement.remove();
-    }
-}
-
+/**
+ * 6. Подсветка активного пункта меню
+ */
 function initNavHighlight() {
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', () => {
         let current = '';
+        const headerHeight = document.querySelector('.header').offsetHeight + 100;
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            const headerHeight = document.querySelector('.header').offsetHeight;
-
-            if (scrollY >= (sectionTop - headerHeight - 100)) {
+            const sectionTop = section.offsetTop - headerHeight;
+            if (window.scrollY >= sectionTop) {
                 current = section.getAttribute('id');
             }
         });
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === current) {
+            if (link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
             }
         });
     });
-}
-
-function initSearchFunctionality() {
-    const searchInput = document.querySelector('.search-box input');
-    const searchButton = document.querySelector('.search-box button');
-
-    if (!searchInput || !searchButton) return;
-
-    searchButton.addEventListener('click', performSearch);
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            performSearch();
-        }
-    });
-}
-
-function performSearch() {
-    const searchInput = document.querySelector('.search-box input');
-    const searchTerm = searchInput.value.trim().toLowerCase();
-
-    if (!searchTerm) {
-        alert('Пожалуйста, введите поисковый запрос');
-        return;
-    }
-
-    const mainContent = document.querySelector('.main-content');
-    const sections = mainContent.querySelectorAll('section');
-    let foundMatches = false;
-    let matchCount = 0;
-
-    sections.forEach(section => {
-        const textContent = section.textContent.toLowerCase();
-        if (textContent.includes(searchTerm)) {
-            foundMatches = true;
-            matchCount++;
-
-            section.style.boxShadow = '0 0 0 2px #3498db';
-            setTimeout(() => {
-                section.style.boxShadow = '';
-            }, 2000);
-        }
-    });
-
-    if (foundMatches) {
-        alert(`Найдено ${matchCount} раздел(ов) содержащих "${searchTerm}"`);
-    } else {
-        alert(`По запросу "${searchTerm}" ничего не найдено`);
-    }
 }
