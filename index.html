@@ -8,12 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div id="loader" class="loader-wrapper">
+  <div class="loader-content">
+    <div class="loader-logo">OVER<span>COM</span></div>
+    <div class="loader-line"></div>
+  </div>
+</div>
 
 <header class="header">
   <div class="container header-flex">
@@ -29,6 +34,7 @@
         <li><a href="services.html" class="nav-link">УСЛУГИ</a></li>
         <li><a href="career.html" class="nav-link">КАРЬЕРА</a></li>
         <li><a href="contacts.html" class="nav-link">КОНТАКТЫ</a></li>
+        <li><button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button></li>
       </ul>
       <div class="mobile-menu-toggle">
         <i class="fas fa-bars"></i>
@@ -36,7 +42,7 @@
     </nav>
 
     <div class="header-actions">
-      <a href="#contacts" class="phone-link">
+      <a href="#callback" class="phone-link phone-modal-trigger">
         <i class="fas fa-phone"></i> СВЯЗАТЬСЯ
       </a>
     </div>
@@ -51,7 +57,7 @@
       <p>Комплексные геологоразведочные, буровые и взрывные работы на территории Казахстана с 2011 года. Профессиональные решения для недропользователей.</p>
       <div class="hero-btns">
         <a href="services.html" class="btn btn-primary">Наши услуги</a>
-        <a href="#contacts" class="btn btn-outline">Связаться с нами</a>
+        <a href="#callback" class="btn btn-outline phone-modal-trigger">Заказать звонок</a>
       </div>
     </div>
   </section>
@@ -202,6 +208,19 @@
     </div>
   </section>
 </main>
+
+<div id="callbackModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Заказать звонок</h3>
+    <p>Оставьте ваши данные, и мы свяжемся с вами.</p>
+    <form id="modalForm">
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="tel" placeholder="+7 (___) ___-__-__" required>
+      <button type="submit" class="btn btn-primary full-width">ПЕРЕЗВОНИТЕ МНЕ</button>
+    </form>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="container">

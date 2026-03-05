@@ -14,6 +14,13 @@
 </head>
 <body>
 
+<div id="loader" class="loader-wrapper">
+  <div class="loader-content">
+    <div class="loader-logo">OVER<span>COM</span></div>
+    <div class="loader-line"></div>
+  </div>
+</div>
+
 <header class="header">
   <div class="container header-flex">
     <div class="logo">
@@ -27,13 +34,14 @@
         <li><a href="services.html" class="nav-link">УСЛУГИ</a></li>
         <li><a href="career.html" class="nav-link">КАРЬЕРА</a></li>
         <li><a href="contacts.html" class="nav-link active">КОНТАКТЫ</a></li>
+        <li><button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button></li>
       </ul>
       <div class="mobile-menu-toggle">
         <i class="fas fa-bars"></i>
       </div>
     </nav>
     <div class="header-actions">
-      <a href="tel:+77212000000" class="phone-link">
+      <a href="#callback" class="phone-link phone-modal-trigger">
         <i class="fas fa-phone"></i> СВЯЗАТЬСЯ
       </a>
     </div>
@@ -130,6 +138,19 @@
     </div>
   </section>
 </main>
+
+<div id="callbackModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Заказать звонок</h3>
+    <p>Оставьте ваши контакты, и наш диспетчер перезвонит вам в ближайшее время.</p>
+    <form id="modalForm">
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="tel" placeholder="+7 (___) ___-__-__" required>
+      <button type="submit" class="btn btn-primary full-width">ПЕРЕЗВОНИТЕ МНЕ</button>
+    </form>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="container">
