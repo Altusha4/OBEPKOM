@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormValidation();
     initNavHighlight();
     initHeroParallax();
+    initCalculator();
 });
 
 function hideLoader() {
@@ -251,4 +252,26 @@ function initNavHighlight() {
             }
         });
     });
+}
+
+function initCalculator() {
+    const rock = document.getElementById('rock-type');
+    const depth = document.getElementById('depth');
+    const result = document.getElementById('total-price');
+
+    if (!rock || !depth || !result) return;
+
+    const calculate = () => {
+        const rate = parseInt(rock.value);
+        const meters = parseInt(depth.value) || 0;
+
+        const total = rate * meters;
+
+        result.innerText = total.toLocaleString('ru-RU');
+    };
+
+    rock.addEventListener('change', calculate);
+    depth.addEventListener('input', calculate);
+
+    calculate();
 }
