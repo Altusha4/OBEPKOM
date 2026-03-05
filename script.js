@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('ТОО "ОВЕРКОМ" — Визуальное обновление активировано');
+    console.log('%c ТОО "ОВЕРКОМ" %c Модуль инициализирован ', 'background: #e63946; color: #fff; padding: 5px;', 'background: #0f1113; color: #fff; padding: 5px;');
 
     initMobileMenu();
     initHeaderScroll();
@@ -7,11 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollReveal();
     initFormValidation();
     initNavHighlight();
+    initStatsCounter();
+    initHeroParallax();
 });
 
-/**
- * 1. Мобильное меню (Бургер)
- */
 function initMobileMenu() {
     const toggle = document.querySelector('.mobile-menu-toggle');
     const menu = document.querySelector('.nav-menu');
@@ -20,13 +19,11 @@ function initMobileMenu() {
 
     toggle.addEventListener('click', () => {
         menu.classList.toggle('active');
-        // Меняем иконку с баров на крестик
         const icon = toggle.querySelector('i');
         icon.classList.toggle('fa-bars');
         icon.classList.toggle('fa-times');
     });
 
-    // Закрываем меню при клике на ссылку
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             menu.classList.remove('active');
@@ -37,31 +34,37 @@ function initMobileMenu() {
     });
 }
 
-/**
- * 2. Эффекты шапки при скролле
- */
 function initHeaderScroll() {
     const header = document.querySelector('.header');
-
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            header.style.padding = '10px 0';
-            header.style.backgroundColor = 'rgba(26, 42, 58, 0.98)';
+            header.style.backgroundColor = 'rgba(15, 17, 19, 1)';
+            header.style.height = '70px';
+            header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
         } else {
-            header.style.padding = '15px 0';
-            header.style.backgroundColor = 'rgba(26, 42, 58, 0.95)';
+            header.style.backgroundColor = 'rgba(15, 17, 19, 0.98)';
+            header.style.height = '80px';
+            header.style.boxShadow = 'none';
         }
     });
 }
 
-/**
- * 3. Плавный скролл к секциям
- */
+function initHeroParallax() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    window.addEventListener('scroll', () => {
+        const scrollValue = window.scrollY;
+        hero.style.backgroundPositionY = scrollValue * 0.5 + 'px';
+    });
+}
+
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            e.preventDefault();
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
@@ -75,14 +78,8 @@ function initSmoothScroll() {
     });
 }
 
-/**
- * 4. Анимация появления блоков при скролле (Scroll Reveal)
- */
 function initScrollReveal() {
-    const observerOptions = {
-        threshold: 0.1
-    };
-
+    const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -92,77 +89,95 @@ function initScrollReveal() {
         });
     }, observerOptions);
 
-    // Применяем к карточкам и секциям
-    const animatedElements = document.querySelectorAll('.service-card, .section-header, .about-grid, .stat-item');
+    const animatedElements = document.querySelectorAll('.service-card, .section-header, .about-grid, .eq-card, .gallery-item, .legal-info-box');
 
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease-out';
+        el.style.transition = 'all 0.8s cubic-bezier(0.2, 1, 0.3, 1)';
         observer.observe(el);
     });
 }
 
-/**
- * 5. Валидация формы
- */
-function initFormValidation() {
-    const form = document.getElementById('feedbackForm');
-    if (!form) return;
+function initStatsCounter() {
+    const statsSection = document.querySelector('.stats-bar');
+    if (!statsSection) return;
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    const counters = document.querySelectorAll('.stat-number');
+    let started = false;
 
-        const inputs = form.querySelectorAll('input, textarea');
-        let isFormValid = true;
+    const startCounter = () => {
+        counters.forEach(counter => {
+            const target = parseInt(counter.innerText);
+            let count = 0;
+            const speed = 2000 / target;
 
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                input.style.borderColor = '#e74c3c';
-                isFormValid = false;
-            } else {
-                input.style.borderColor = '#ddd';
-            }
+            const updateCount = () => {
+                if (count < target) {
+                    count++;
+                    counter.innerText = count + (counter.parentElement.innerText.includes('+') ? '+' : '');
+                    setTimeout(updateCount, speed);
+                } else {
+                    counter.innerText = target + (counter.parentElement.innerText.includes('+') ? '+' : '');
+                }
+            };
+            updateCount();
         });
+    };
 
-        if (isFormValid) {
-            const btn = form.querySelector('button');
-            const originalText = btn.textContent;
-
-            btn.disabled = true;
-            btn.textContent = 'Отправка...';
-
-            setTimeout(() => {
-                alert('Благодарим за обращение! Наши специалисты свяжутся с вами в ближайшее время.');
-                form.reset();
-                btn.disabled = false;
-                btn.textContent = originalText;
-            }, 1500);
+    window.addEventListener('scroll', () => {
+        const sectionPos = statsSection.getBoundingClientRect().top;
+        const screenPos = window.innerHeight;
+        if (sectionPos < screenPos && !started) {
+            startCounter();
+            started = true;
         }
     });
 }
 
-/**
- * 6. Подсветка активного пункта меню
- */
+function initFormValidation() {
+    const form = document.getElementById('feedbackForm') || document.getElementById('careerForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = form.querySelector('button');
+        const originalText = btn.innerHTML;
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ОТПРАВКА...';
+
+        setTimeout(() => {
+            btn.style.backgroundColor = '#27ae60';
+            btn.innerHTML = '<i class="fas fa-check"></i> УСПЕШНО ОТПРАВЛЕНО';
+
+            setTimeout(() => {
+                form.reset();
+                btn.disabled = false;
+                btn.style.backgroundColor = '';
+                btn.innerHTML = originalText;
+            }, 3000);
+        }, 1500);
+    });
+}
+
 function initNavHighlight() {
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-menu a');
 
     window.addEventListener('scroll', () => {
         let current = '';
-        const headerHeight = document.querySelector('.header').offsetHeight + 100;
-
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - headerHeight;
-            if (window.scrollY >= sectionTop) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= (sectionTop - 150)) {
                 current = section.getAttribute('id');
             }
         });
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
+            if (link.getAttribute('href').includes(current) && current !== '') {
                 link.classList.add('active');
             }
         });

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты | ТОО "ОВЕРКОМ" — Караганда</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-flex">
+    <div class="logo">
+      <h1><span class="logo-accent">OVER</span>COM</h1>
+      <p class="subtitle">MINING SERVICES</p>
+    </div>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">ГЛАВНАЯ</a></li>
+        <li><a href="about.html" class="nav-link">О КОМПАНИИ</a></li>
+        <li><a href="services.html" class="nav-link">УСЛУГИ</a></li>
+        <li><a href="career.html" class="nav-link">КАРЬЕРА</a></li>
+        <li><a href="contacts.html" class="nav-link active">КОНТАКТЫ</a></li>
+      </ul>
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="tel:+77212000000" class="phone-link">
+        <i class="fas fa-phone"></i> СВЯЗАТЬСЯ
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section page-header bg-dark" style="background: linear-gradient(rgba(15,17,19,0.85), rgba(15,17,19,0.85)), url('https://images.unsplash.com/photo-1524230572899-a752b3835840?q=80&w=1200') center/cover;">
+    <div class="container">
+      <span class="pre-title">Мы на связи</span>
+      <h2 class="section-title" style="color: var(--white);">КОНТАКТНАЯ ИНФОРМАЦИЯ</h2>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-box" style="box-shadow: var(--shadow); border-radius: 4px; overflow: hidden;">
+        <div class="contact-info-side" style="border-left: none; border-right: 5px solid var(--accent); padding: 50px;">
+          <h3>Наш офис</h3>
+
+          <div class="info-link">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>Адрес:</strong>
+              <p>Республика Казахстан, г. Караганда,<br>пр. Шахтеров, д. 25, оф. 97</p>
+            </div>
+          </div>
+
+          <div class="info-link">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>Телефоны:</strong>
+              <p>Приемная: +7 (7212) XX-XX-XX<br>Отдел ПТО: +7 (701) XXX-XX-XX</p>
+            </div>
+          </div>
+
+          <div class="info-link">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Email:</strong>
+              <p>info@overcom.kz</p>
+            </div>
+          </div>
+
+          <div class="info-link">
+            <i class="fas fa-clock"></i>
+            <div>
+              <strong>Режим работы:</strong>
+              <p>Пн — Пт: 09:00 - 18:00<br>Сб, Вс: Выходной</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-map-side" style="position: relative; overflow: hidden; min-height: 450px;">
+          <iframe
+                  src="https://yandex.kz/map-widget/v1/?ll=73.135162%2C49.779568&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjA5MDI2OBJC0JrQsNC30LDRhdGB0YLQsNC9LCDSmtCw0YDQs9Cw0L3QtNCwLCDQqNCw0YXRgtC10YDQu9C10YAg0L_RgNC-0YHQv9C10LrRgtC_LCAyNSIKDSfM9EEVv4lDQA%2C%2C&z=17"
+                  width="100%"
+                  height="100%"
+                  frameborder="0"
+                  allowfullscreen="true"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; filter: contrast(1.1);">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header center">
+        <span class="pre-title">Обратная связь</span>
+        <h2>ОСТАЛИСЬ ВОПРОСЫ?</h2>
+        <p>Заполните форму, и наши специалисты подготовят ответ в течение рабочего дня.</p>
+      </div>
+
+      <div style="max-width: 750px; margin: 0 auto;">
+        <form id="feedbackForm" class="contact-form-side" style="background: var(--white); padding: 50px; box-shadow: var(--shadow); border-radius: 4px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <input type="text" placeholder="Ваше имя" required>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="Ваш Email" required>
+            </div>
+          </div>
+          <input type="text" placeholder="Тема сообщения" style="margin-top: 20px;">
+          <textarea placeholder="Ваш вопрос или описание проекта" rows="6" required style="margin-top: 20px;"></textarea>
+
+          <button type="submit" class="btn btn-primary full-width" style="margin-top: 30px;">
+            ОТПРАВИТЬ СООБЩЕНИЕ
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
