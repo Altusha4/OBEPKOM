@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,12 +33,12 @@
         <li><a href="services.html" class="nav-link">УСЛУГИ</a></li>
         <li><a href="career.html" class="nav-link active">КАРЬЕРА</a></li>
         <li><a href="contacts.html" class="nav-link">КОНТАКТЫ</a></li>
-        <li><button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button></li>
+        <li><button id="theme-toggle" class="theme-btn" aria-label="Сменить тему"><i class="fas fa-moon"></i></button></li>
       </ul>
       <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
     </nav>
     <div class="header-actions">
-      <a href="#callback" class="phone-link phone-modal-trigger"><i class="fas fa-phone"></i> СВЯЗАТЬСЯ</a>
+      <a href="tel:+77212000000" class="phone-link"><i class="fas fa-phone"></i> +7 (7212) XX-XX-XX</a>
     </div>
   </div>
 </header>
@@ -55,41 +54,39 @@
   <section class="section">
     <div class="container">
       <div class="about-grid">
-        <div class="about-text">
-          <p class="lead">Мы всегда ищем талантливых инженеров, геологов и техников, готовых к работе на сложных и интересных объектах Казахстана.</p>
-          <p>Работа в ТОО «ОВЕРКОМ» — это стабильность, современное оборудование и возможность профессионального роста в одной из самых востребованных отраслей экономики.</p>
+        <article class="about-text">
+          <p class="lead">Мы всегда ищем талантливых инженеров, геологов и техников, готовых к работе на сложных объектах Казахстана.</p>
+          <p>Работа в ТОО «ОВЕРКОМ» — это стабильность, современное оборудование и возможность профессионального роста в ключевой отрасли экономики.</p>
 
           <div class="career-benefits" style="margin-top: 30px;">
             <ul class="detail-list">
-              <li><strong>Стабильность:</strong> Официальное трудоустройство и полный социальный пакет.</li>
-              <li><strong>Гибкость:</strong> Работа вахтовым методом с обеспечением комфортного проживания.</li>
-              <li><strong>Развитие:</strong> Регулярное обучение работе с современным ПО (Micromine) и повышение квалификации.</li>
-              <li><strong>Оснащение:</strong> Доступ к передовой технике Atlas Copco и Sandvik.</li>
+              <li><strong>Стабильность:</strong> Официальное трудоустройство и соцпакет.</li>
+              <li><strong>Гибкость:</strong> Вахтовый метод с комфортным проживанием.</li>
+              <li><strong>Развитие:</strong> Обучение работе с ПО Micromine и повышение квалификации.</li>
+              <li><strong>Оснащение:</strong> Передовая техника Atlas Copco и Sandvik.</li>
             </ul>
           </div>
-        </div>
+        </article>
 
-        <div class="career-form-box">
+        <aside class="career-form-box">
           <h3>Отправить резюме</h3>
-          <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Заполните форму, и наш HR-отдел свяжется с вами.</p>
-          <form id="careerForm" class="contact-form-side" style="padding: 0;">
-            <input type="text" placeholder="Ваше полное имя" required>
-            <input type="email" placeholder="Электронная почта" required>
+          <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Заполните анкету, и HR-отдел свяжется с вами для интервью.</p>
 
-            <select required style="width: 100%; padding: 15px; margin-bottom: 20px; background: #f1f1f1; border: none; border-bottom: 2px solid transparent; font-family: 'Inter', sans-serif;">
+          <form id="careerForm" class="contact-form-side" style="padding: 0;">
+            <input type="text" name="candidate_name" placeholder="Ваше полное имя" required minlength="3" autocomplete="name">
+            <input type="email" name="candidate_email" placeholder="Электронная почта" required autocomplete="email">
+
+            <select required name="vacancy" style="width: 100%; padding: 15px; margin-bottom: 25px; background: #f1f1f1; border: none; border-bottom: 2px solid transparent; font-family: 'Inter', sans-serif; cursor: pointer;">
               <option value="" disabled selected>Выберите вакансию</option>
-              <option value="geologist">Геолог-разведчик</option>
-              <option value="driller">Машинист буровой установки</option>
-              <option value="engineer">Инженер-маркшейдер</option>
-              <option value="intern">Стажер (Engineering/IT)</option>
+              <option value="Геолог-разведчик">Геолог-разведчик</option>
+              <option value="Машинист буровой">Машинист буровой установки</option>
+              <option value="Инженер-маркшейдер">Инженер-маркшейдер</option>
+              <option value="Стажер">Стажер (Engineering/IT)</option>
             </select>
 
-            <label style="display: block; margin-bottom: 10px; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; font-weight: 700;">Прикрепить CV (PDF, DOCX):</label>
-            <input type="file" required style="border: none; background: transparent; padding-left: 0; margin-bottom: 30px;">
-
-            <button type="submit" class="btn btn-primary full-width">ОТПРАВИТЬ ОТКЛИК</button>
+            <button type="submit" class="btn btn-primary full-width">ОТПРАВИТЬ АНКЕТУ</button>
           </form>
-        </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -104,17 +101,17 @@
         <div class="service-card">
           <div class="service-icon"><i class="fas fa-helmet-safety"></i></div>
           <h3>Безопасность</h3>
-          <p>Мы обеспечиваем сотрудников лучшей экипировкой и строго следим за соблюдением норм охраны труда.</p>
+          <p>Обеспечиваем сотрудников лучшей экипировкой и строго следим за нормами охраны труда.</p>
         </div>
         <div class="service-card">
           <div class="service-icon"><i class="fas fa-mountain-city"></i></div>
           <h3>Локации</h3>
-          <p>Работа на крупнейших месторождениях Казахстана — от Карагандинской области до ВКО.</p>
+          <p>Работа на крупнейших месторождениях — от Карагандинской области до ВКО.</p>
         </div>
         <div class="service-card">
           <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
           <h3>Обучение</h3>
-          <p>Собственные программы менторства для молодых специалистов и студентов-практикантов.</p>
+          <p>Собственные программы менторства для молодых специалистов и практикантов.</p>
         </div>
       </div>
     </div>
@@ -123,12 +120,18 @@
 
 <div id="callbackModal" class="modal">
   <div class="modal-content">
-    <span class="close-modal">&times;</span>
+    <span class="close-modal" aria-label="Закрыть" tabindex="0">&times;</span>
     <h3>Заказать звонок</h3>
-    <p>Наш HR-специалист или технический директор перезвонит вам.</p>
+    <p>Наш HR-специалист перезвонит вам.</p>
     <form id="modalForm">
-      <input type="text" placeholder="Ваше имя" required>
-      <input type="tel" placeholder="+7 (___) ___-__-__" required>
+      <input type="text" name="user_name" placeholder="Ваше имя" required minlength="2">
+      <input type="tel"
+             name="user_phone"
+             placeholder="+7 (7xx) xxx-xx-xx"
+             required
+             pattern="^(\+7|7|8)?[0-9]{10}$"
+             inputmode="tel"
+             title="Введите 10 цифр номера телефона (например, 7012223344)">
       <button type="submit" class="btn btn-primary full-width">ПЕРЕЗВОНИТЕ МНЕ</button>
     </form>
   </div>
@@ -137,7 +140,9 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-bottom">
-      <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.</p>
+      <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.
+        <i class="fas fa-user-shield" id="admin-login" style="cursor: pointer; opacity: 0.3; margin-left: 10px;" title="Экспорт БД заявок"></i>
+      </p>
     </div>
   </div>
 </footer>

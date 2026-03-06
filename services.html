@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,13 +33,13 @@
                 <li><a href="services.html" class="nav-link active">УСЛУГИ</a></li>
                 <li><a href="career.html" class="nav-link">КАРЬЕРА</a></li>
                 <li><a href="contacts.html" class="nav-link">КОНТАКТЫ</a></li>
-                <li><button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button></li>
+                <li><button id="theme-toggle" class="theme-btn" aria-label="Сменить тему"><i class="fas fa-moon"></i></button></li>
             </ul>
             <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
         </nav>
         <div class="header-actions">
-            <a href="#callback" class="phone-link phone-modal-trigger">
-                <i class="fas fa-phone"></i> СВЯЗАТЬСЯ
+            <a href="tel:+77212000000" class="phone-link">
+                <i class="fas fa-phone"></i> +7 (7212) XX-XX-XX
             </a>
         </div>
     </div>
@@ -57,20 +56,20 @@
     <section class="section services-detailed">
         <div class="container">
             <div class="detailed-grid">
-                <div class="service-detail-card">
+                <article class="service-detail-card">
                     <div class="detail-number">01</div>
                     <div class="detail-icon"><i class="fas fa-map-marked-alt"></i></div>
                     <div class="detail-content">
                         <h3>Геологоразведочные изыскания</h3>
-                        <p>Полный спектр исследований для обнаружения и оценки месторождений по стандартам JORC и KAZRC.</p>
+                        <p>Исследования для обнаружения и оценки месторождений по стандартам JORC и KAZRC.</p>
                         <ul class="detail-list">
                             <li><strong>ГИС-моделирование:</strong> ПО Micromine.</li>
                             <li><strong>Геофизика:</strong> Магниторазведка и сейсморазведка.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
-                <div class="service-detail-card">
+                <article class="service-detail-card">
                     <div class="detail-number">02</div>
                     <div class="detail-icon"><i class="fas fa-drilling"></i></div>
                     <div class="detail-content">
@@ -81,7 +80,7 @@
                             <li><strong>RC-бурение:</strong> Экспресс-оценка ресурсов.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -91,14 +90,14 @@
             <div class="section-header center">
                 <span class="pre-title">Инструмент оценки</span>
                 <h2>КАЛЬКУЛЯТОР БУРЕНИЯ</h2>
-                <p>Предварительный расчет стоимости в зависимости от сложности объекта</p>
+                <p>Предварительный расчет стоимости в зависимости от категории сложности пород</p>
             </div>
 
             <div class="contact-box" style="background: rgba(255,255,255,0.05); padding: 50px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
                     <div>
-                        <label style="display: block; margin-bottom: 10px; font-weight: 700;">КАТЕГОРИЯ ГОРНЫХ ПОРОД:</label>
-                        <select id="rock-type" style="width: 100%; padding: 15px; background: #2c3136; color: #fff; border: none; border-radius: 4px;">
+                        <label for="rock-type" style="display: block; margin-bottom: 10px; font-weight: 700;">КАТЕГОРИЯ ГОРНЫХ ПОРОД:</label>
+                        <select id="rock-type" name="rock_category" style="width: 100%; padding: 15px; background: #2c3136; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
                             <option value="12000">I-III (Мягкие: песок, суглинок)</option>
                             <option value="18000" selected>IV-VI (Средние: сланец, известняк)</option>
                             <option value="28000">VII-IX (Твердые: гранит, кварцит)</option>
@@ -106,17 +105,25 @@
                         </select>
                     </div>
                     <div>
-                        <label style="display: block; margin-bottom: 10px; font-weight: 700;">ГЛУБИНА БУРЕНИЯ (МЕТРЫ):</label>
-                        <input type="number" id="depth" value="100" min="1" max="2000" style="width: 100%; padding: 15px; background: #2c3136; color: #fff; border: none; border-radius: 4px;">
+                        <label for="depth" style="display: block; margin-bottom: 10px; font-weight: 700;">ГЛУБИНА (МЕТРЫ):</label>
+                        <input type="number"
+                               id="depth"
+                               name="depth_val"
+                               value="100"
+                               min="1"
+                               max="5000"
+                               step="1"
+                               onkeydown="return event.keyCode !== 69"
+                               style="width: 100%; padding: 15px; background: #2c3136; color: #fff; border: none; border-radius: 4px;">
                     </div>
                     <div style="display: flex; flex-direction: column; justify-content: flex-end;">
                         <div style="background: var(--accent); padding: 15px; border-radius: 4px; text-align: center;">
-                            <span style="font-size: 0.8rem; text-transform: uppercase; display: block; opacity: 0.8;">Ориентировочная стоимость:</span>
+                            <span style="font-size: 0.8rem; text-transform: uppercase; display: block; opacity: 0.8;">Прогноз стоимости:</span>
                             <strong style="font-size: 1.4rem;"><span id="total-price">0</span> KZT</strong>
                         </div>
                     </div>
                 </div>
-                <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6; text-align: center;">* Расчет является предварительным и не является публичной офертой.</p>
+                <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6; text-align: center;">* Данный расчет является предварительным инженерным прогнозом.</p>
             </div>
         </div>
     </section>
@@ -125,28 +132,28 @@
         <div class="container">
             <div class="section-header center">
                 <span class="pre-title">Рабочий процесс</span>
-                <h2>КАК МЫ РАБОТАЕМ</h2>
+                <h2>АЛГОРИТМ РЕАЛИЗАЦИИ</h2>
             </div>
             <div class="steps-grid">
                 <div class="step-item">
                     <span class="step-num">1</span>
                     <h4>Анализ</h4>
-                    <p>Изучение ТЗ и архивных данных.</p>
+                    <p>Технический аудит ТЗ и архивных данных.</p>
                 </div>
                 <div class="step-item">
                     <span class="step-num">2</span>
                     <h4>Мобилизация</h4>
-                    <p>Доставка техники на участок.</p>
+                    <p>Транспортировка буровых комплексов.</p>
                 </div>
                 <div class="step-item">
                     <span class="step-num">3</span>
                     <h4>Выполнение</h4>
-                    <p>Буровые работы по графику.</p>
+                    <p>Бурение и отбор керна по ГОСТ.</p>
                 </div>
                 <div class="step-item">
                     <span class="step-num">4</span>
                     <h4>Отчетность</h4>
-                    <p>Передача керна и документов.</p>
+                    <p>Передача геологической документации.</p>
                 </div>
             </div>
         </div>
@@ -154,21 +161,27 @@
 
     <section class="section bg-light cta-section">
         <div class="container center" style="text-align: center;">
-            <h2>Готовы начать сотрудничество?</h2>
-            <p style="margin: 20px 0 30px; color: var(--text-light);">Получите расчет стоимости и графиков в течение 24 часов.</p>
-            <a href="#callback" class="btn btn-primary phone-modal-trigger">ОСТАВИТЬ ЗАЯВКУ</a>
+            <h2>Нужна детальная смета проекта?</h2>
+            <p style="margin: 20px 0 30px; color: var(--text-light);">Наши инженеры подготовят коммерческое предложение в течение рабочего дня.</p>
+            <a href="tel:+77212000000" class="btn btn-primary">ПОЗВОНИТЬ СЕЙЧАС</a>
         </div>
     </section>
 </main>
 
 <div id="callbackModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h3>Заявка на услуги</h3>
-        <p>Оставьте ваши контакты, и специалист перезвонит вам.</p>
+        <span class="close-modal" aria-label="Закрыть" tabindex="0">&times;</span>
+        <h3>Заявка на расчет</h3>
+        <p>Оставьте ваши контакты, и главный инженер перезвонит вам.</p>
         <form id="modalForm">
-            <input type="text" placeholder="Ваше имя" required>
-            <input type="tel" placeholder="+7 (___) ___-__-__" required>
+            <input type="text" name="user_name" placeholder="Ваше имя" required minlength="2">
+            <input type="tel"
+                   name="user_phone"
+                   placeholder="+7 (7xx) xxx-xx-xx"
+                   required
+                   pattern="^(\+7|7|8)?[0-9]{10}$"
+                   inputmode="tel"
+                   title="Введите 10 цифр номера телефона">
             <button type="submit" class="btn btn-primary full-width">ОТПРАВИТЬ ЗАПРОС</button>
         </form>
     </div>
@@ -177,7 +190,9 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-bottom">
-            <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.</p>
+            <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.
+                <i class="fas fa-user-shield" id="admin-login" style="cursor: pointer; opacity: 0.3; margin-left: 10px;" title="Admin Access"></i>
+            </p>
         </div>
     </div>
 </footer>

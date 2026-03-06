@@ -13,14 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavHighlight();
     initHeroParallax();
     initCalculator();
+    initAdminPanel();
 });
 
 function hideLoader() {
     const loader = document.getElementById('loader');
     if (!loader) return;
-
     const isLoaded = sessionStorage.getItem('firstLoadDone');
-
     if (isLoaded) {
         loader.style.display = 'none';
     } else {
@@ -47,14 +46,9 @@ function initTheme() {
 
     btn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        let theme = 'light';
-        if (document.body.classList.contains('dark-mode')) {
-            theme = 'dark';
-            icon.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            icon.classList.replace('fa-sun', 'fa-moon');
-        }
-        localStorage.setItem('theme', theme);
+        let isDark = document.body.classList.contains('dark-mode');
+        icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 }
 
@@ -62,7 +56,6 @@ function initModal() {
     const modal = document.getElementById('callbackModal');
     const triggers = document.querySelectorAll('.phone-modal-trigger');
     const closeBtn = document.querySelector('.close-modal');
-
     if (!modal) return;
 
     triggers.forEach(trigger => {
@@ -93,111 +86,6 @@ function initMobileMenu() {
         icon.classList.toggle('fa-bars');
         icon.classList.toggle('fa-times');
     });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            menu.classList.remove('active');
-            const icon = toggle.querySelector('i');
-            icon.classList.add('fa-bars');
-            icon.classList.remove('fa-times');
-        });
-    });
-}
-
-function initHeaderScroll() {
-    const header = document.querySelector('.header');
-    if (!header) return;
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(15, 17, 19, 1)';
-            header.style.height = '70px';
-            header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
-        } else {
-            header.style.backgroundColor = 'rgba(15, 17, 19, 0.98)';
-            header.style.height = '80px';
-            header.style.boxShadow = 'none';
-        }
-    });
-}
-
-function initHeroParallax() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-    window.addEventListener('scroll', () => {
-        const scrollValue = window.scrollY;
-        hero.style.backgroundPositionY = scrollValue * 0.5 + 'px';
-    });
-}
-
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#' || this.classList.contains('phone-modal-trigger')) return;
-
-            e.preventDefault();
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                window.scrollTo({
-                    top: targetElement.offsetTop - headerHeight,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-function initScrollReveal() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
-
-    const animatedElements = document.querySelectorAll('.service-card, .section-header, .about-grid, .eq-card, .gallery-item, .legal-info-box, .service-detail-card');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s cubic-bezier(0.2, 1, 0.3, 1)';
-        observer.observe(el);
-    });
-}
-
-function initStatsCounter() {
-    const statsSection = document.querySelector('.stats-bar');
-    if (!statsSection) return;
-    const counters = document.querySelectorAll('.stat-number');
-    let started = false;
-
-    const startCounter = () => {
-        counters.forEach(counter => {
-            const target = parseInt(counter.innerText);
-            let count = 0;
-            const speed = 2000 / target;
-            const updateCount = () => {
-                if (count < target) {
-                    count++;
-                    counter.innerText = count + (counter.parentElement.innerText.includes('+') ? '+' : '');
-                    setTimeout(updateCount, speed);
-                } else {
-                    counter.innerText = target + (counter.parentElement.innerText.includes('+') ? '+' : '');
-                }
-            };
-            updateCount();
-        });
-    };
-
-    window.addEventListener('scroll', () => {
-        const sectionPos = statsSection.getBoundingClientRect().top;
-        if (sectionPos < window.innerHeight && !started) {
-            startCounter();
-            started = true;
-        }
-    });
 }
 
 function initFormValidation() {
@@ -208,70 +96,188 @@ function initFormValidation() {
             const btn = form.querySelector('button');
             const originalText = btn.innerHTML;
 
+            const name = form.querySelector('input[type="text"]')?.value || 'Аноним';
+            const date = new Date().toLocaleString();
+
+            // Проверка типа формы по ID
+            if (form.id === 'careerForm') {
+                const email = form.querySelector('input[type="email"]')?.value || 'Не указан';
+                const vacancy = form.querySelector('select')?.value || 'Не выбрана';
+
+                const careerEntries = JSON.parse(localStorage.getItem('overcom_cv') || '[]');
+                careerEntries.push({ date, name, email, vacancy });
+                localStorage.setItem('overcom_cv', JSON.stringify(careerEntries));
+            } else {
+                const phone = form.querySelector('input[type="tel"]')?.value || 'Не указан';
+                const leadsEntries = JSON.parse(localStorage.getItem('overcom_leads') || '[]');
+                leadsEntries.push({ date, name, phone });
+                localStorage.setItem('overcom_leads', JSON.stringify(leadsEntries));
+            }
+
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ОТПРАВКА...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> СОХРАНЕНИЕ...';
 
             setTimeout(() => {
-                const oldBg = btn.style.backgroundColor;
                 btn.style.backgroundColor = '#27ae60';
                 btn.innerHTML = '<i class="fas fa-check"></i> УСПЕШНО';
-
                 setTimeout(() => {
                     form.reset();
                     btn.disabled = false;
-                    btn.style.backgroundColor = oldBg;
+                    btn.style.backgroundColor = '';
                     btn.innerHTML = originalText;
                     const modal = document.getElementById('callbackModal');
-                    if (modal && modal.style.display === 'block') {
+                    if (modal) {
                         modal.style.display = 'none';
                         document.body.style.overflow = 'auto';
                     }
-                }, 2500);
-            }, 1500);
+                }, 1500);
+            }, 1000);
         });
+    });
+}
+
+function downloadCSV(type) {
+    let data, filename, header;
+
+    if (type === 'leads') {
+        data = JSON.parse(localStorage.getItem('overcom_leads') || '[]');
+        filename = `Leads_Clients_${new Date().toLocaleDateString()}`;
+        header = "Дата;Имя;Телефон\n";
+    } else {
+        data = JSON.parse(localStorage.getItem('overcom_cv') || '[]');
+        filename = `HR_Candidates_${new Date().toLocaleDateString()}`;
+        header = "Дата;ФИО Кандидата;Email;Вакансия\n";
+    }
+
+    if (data.length === 0) {
+        alert('База данных пуста!');
+        return;
+    }
+
+    let csvContent = "\uFEFF" + header;
+    data.forEach(item => {
+        csvContent += type === 'leads'
+            ? `${item.date};${item.name};${item.phone}\n`
+            : `${item.date};${item.name};${item.email};${item.vacancy}\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute("download", `${filename}.csv`);
+    link.click();
+}
+
+function initAdminPanel() {
+    const adminBtn = document.getElementById('admin-login');
+    if (!adminBtn) return;
+
+    adminBtn.addEventListener('click', () => {
+        const pass = prompt("Введите инженерный ключ доступа:");
+        if (pass === "OVERCOM2026") {
+            const mode = prompt("Выберите действие:\n1 - Скачать заявки клиентов (Leads)\n2 - Скачать анкеты кандидатов (HR)");
+            if (mode === "1") downloadCSV('leads');
+            else if (mode === "2") downloadCSV('cv');
+        } else if (pass !== null) {
+            alert("Ошибка доступа: Неверный ключ.");
+        }
+    });
+}
+
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+    if (!header) return;
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.backgroundColor = 'rgba(15, 17, 19, 1)';
+            header.style.height = '70px';
+        } else {
+            header.style.backgroundColor = 'rgba(15, 17, 19, 0.98)';
+            header.style.height = '80px';
+        }
+    });
+}
+
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const tid = this.getAttribute('href');
+            if (tid === '#' || this.classList.contains('phone-modal-trigger')) return;
+            e.preventDefault();
+            const target = document.querySelector(tid);
+            if (target) {
+                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+function initScrollReveal() {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.style.opacity = '1';
+                e.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .section-header, .about-grid, .eq-card, .service-detail-card, .gallery-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.8s ease-out';
+        obs.observe(el);
+    });
+}
+
+function initStatsCounter() {
+    const sec = document.querySelector('.stats-bar');
+    if (!sec) return;
+    let started = false;
+
+    window.addEventListener('scroll', () => {
+        if (sec.getBoundingClientRect().top < window.innerHeight && !started) {
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const target = parseInt(counter.innerText);
+                let curr = 0;
+                const update = () => {
+                    if (curr < target) {
+                        curr += Math.ceil(target / 100);
+                        counter.innerText = (curr > target ? target : curr) + (counter.parentElement.innerText.includes('+') ? '+' : '');
+                        setTimeout(update, 20);
+                    }
+                };
+                update();
+            });
+            started = true;
+        }
     });
 }
 
 function initNavHighlight() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-
+    const secs = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-menu a');
     window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= (sectionTop - 150)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current) && current !== '') {
-                link.classList.add('active');
-            }
+        let cur = '';
+        secs.forEach(s => { if (window.scrollY >= (s.offsetTop - 150)) cur = s.getAttribute('id'); });
+        links.forEach(l => {
+            l.classList.remove('active');
+            if (l.getAttribute('href').includes(cur) && cur !== '') l.classList.add('active');
         });
     });
 }
 
+function initHeroParallax() {
+    const hero = document.querySelector('.hero');
+    if (hero) window.addEventListener('scroll', () => { hero.style.backgroundPositionY = window.scrollY * 0.5 + 'px'; });
+}
+
 function initCalculator() {
-    const rock = document.getElementById('rock-type');
-    const depth = document.getElementById('depth');
-    const result = document.getElementById('total-price');
-
-    if (!rock || !depth || !result) return;
-
-    const calculate = () => {
-        const rate = parseInt(rock.value);
-        const meters = parseInt(depth.value) || 0;
-
-        const total = rate * meters;
-
-        result.innerText = total.toLocaleString('ru-RU');
+    const r = document.getElementById('rock-type'), d = document.getElementById('depth'), res = document.getElementById('total-price');
+    if (!r || !d || !res) return;
+    const calc = () => {
+        const total = (parseInt(r.value) * (parseInt(d.value) || 0));
+        res.innerText = total.toLocaleString('ru-RU');
     };
-
-    rock.addEventListener('change', calculate);
-    depth.addEventListener('input', calculate);
-
-    calculate();
+    r.onchange = calc; d.oninput = calc; calc();
 }

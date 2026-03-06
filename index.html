@@ -34,7 +34,7 @@
         <li><a href="services.html" class="nav-link">УСЛУГИ</a></li>
         <li><a href="career.html" class="nav-link">КАРЬЕРА</a></li>
         <li><a href="contacts.html" class="nav-link">КОНТАКТЫ</a></li>
-        <li><button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button></li>
+        <li><button id="theme-toggle" class="theme-btn" aria-label="Переключить тему"><i class="fas fa-moon"></i></button></li>
       </ul>
       <div class="mobile-menu-toggle">
         <i class="fas fa-bars"></i>
@@ -42,8 +42,8 @@
     </nav>
 
     <div class="header-actions">
-      <a href="#callback" class="phone-link phone-modal-trigger">
-        <i class="fas fa-phone"></i> СВЯЗАТЬСЯ
+      <a href="tel:+77212000000" class="phone-link">
+        <i class="fas fa-phone"></i> +7 (7212) XX-XX-XX
       </a>
     </div>
   </div>
@@ -57,7 +57,7 @@
       <p>Комплексные геологоразведочные, буровые и взрывные работы на территории Казахстана с 2011 года. Профессиональные решения для недропользователей.</p>
       <div class="hero-btns">
         <a href="services.html" class="btn btn-primary">Наши услуги</a>
-        <a href="#callback" class="btn btn-outline phone-modal-trigger">Заказать звонок</a>
+        <a href="tel:+77212000000" class="btn btn-outline">Позвонить специалисту</a>
       </div>
     </div>
   </section>
@@ -178,11 +178,11 @@
           <h3>Напишите нам</h3>
           <form id="feedbackForm">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-              <input type="text" placeholder="Ваше имя" required>
-              <input type="email" placeholder="Ваш Email" required>
+              <input type="text" placeholder="Ваше имя" required minlength="2" autocomplete="name">
+              <input type="email" placeholder="Ваш Email" required autocomplete="email">
             </div>
-            <input type="text" placeholder="Тема сообщения">
-            <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+            <input type="text" placeholder="Тема сообщения" minlength="5">
+            <textarea placeholder="Ваше сообщение" rows="5" required minlength="10"></textarea>
             <button type="submit" class="btn btn-primary full-width">Отправить запрос</button>
           </form>
         </div>
@@ -194,11 +194,11 @@
           </div>
           <div class="info-link">
             <i class="fas fa-envelope"></i>
-            <p>info@overcom.kz</p>
+            <p><a href="mailto:info@overcom.kz">info@overcom.kz</a></p>
           </div>
           <div class="info-link">
             <i class="fas fa-phone-alt"></i>
-            <p>+7 (7212) XX-XX-XX</p>
+            <p><a href="tel:+77212000000">+7 (7212) XX-XX-XX</a></p>
           </div>
           <div class="info-link" style="margin-top: 20px;">
             <a href="contacts.html" class="btn-text" style="color: var(--accent);">Открыть карту →</a>
@@ -211,12 +211,17 @@
 
 <div id="callbackModal" class="modal">
   <div class="modal-content">
-    <span class="close-modal">&times;</span>
+    <span class="close-modal" tabindex="0">&times;</span>
     <h3>Заказать звонок</h3>
     <p>Оставьте ваши данные, и мы свяжемся с вами.</p>
     <form id="modalForm">
-      <input type="text" placeholder="Ваше имя" required>
-      <input type="tel" placeholder="+7 (___) ___-__-__" required>
+      <input type="text" placeholder="Ваше имя" required minlength="2" autocomplete="name">
+      <input type="tel"
+             placeholder="+7 (7xx) xxx-xx-xx"
+             required
+             pattern="^(\+7|7|8)?[0-9]{10}$"
+             inputmode="tel"
+             title="Введите 10 цифр номера телефона (например, 7012345678)">
       <button type="submit" class="btn btn-primary full-width">ПЕРЕЗВОНИТЕ МНЕ</button>
     </form>
   </div>
@@ -225,7 +230,9 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-bottom">
-      <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.</p>
+      <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.
+        <i class="fas fa-user-shield" id="admin-login" style="cursor: pointer; opacity: 0.3; margin-left: 10px;" title="Admin Access"></i>
+      </p>
     </div>
   </div>
 </footer>
