@@ -46,10 +46,10 @@
 </header>
 
 <main>
-    <section class="section page-header bg-dark" style="background: linear-gradient(rgba(15,17,19,0.85), rgba(15,17,19,0.85)), url('https://images.unsplash.com/photo-1581092323396-908076044715?q=80&w=1200') center/cover;">
-        <div class="container">
+    <section class="section page-header-hero bg-dark" style="background: linear-gradient(rgba(15,17,19,0.85), rgba(15,17,19,0.85)), url('https://images.unsplash.com/photo-1581092323396-908076044715?q=80&w=1200') center/cover;">
+        <div class="container relative-z">
             <span class="pre-title">Наши компетенции</span>
-            <h2 class="section-title" style="color: var(--white);">ПЕРЕЧЕНЬ УСЛУГ</h2>
+            <h2 class="section-title text-white">ПЕРЕЧЕНЬ УСЛУГ</h2>
         </div>
     </section>
 
@@ -93,68 +93,29 @@
                 <p>Предварительный расчет стоимости в зависимости от категории сложности пород</p>
             </div>
 
-            <div class="contact-box" style="background: rgba(255,255,255,0.05); padding: 50px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
-                    <div>
-                        <label for="rock-type" style="display: block; margin-bottom: 10px; font-weight: 700;">КАТЕГОРИЯ ГОРНЫХ ПОРОД:</label>
-                        <select id="rock-type" name="rock_category" style="width: 100%; padding: 15px; background: #2c3136; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+            <div class="calc-wrapper">
+                <div class="calc-grid">
+                    <div class="calc-input-group">
+                        <label for="rock-type">КАТЕГОРИЯ ГОРНЫХ ПОРОД:</label>
+                        <select id="rock-type" name="rock_category">
                             <option value="12000">I-III (Мягкие: песок, суглинок)</option>
                             <option value="18000" selected>IV-VI (Средние: сланец, известняк)</option>
                             <option value="28000">VII-IX (Твердые: гранит, кварцит)</option>
                             <option value="45000">X-XII (Очень твердые: габбро, корунд)</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="depth" style="display: block; margin-bottom: 10px; font-weight: 700;">ГЛУБИНА (МЕТРЫ):</label>
-                        <input type="number"
-                               id="depth"
-                               name="depth_val"
-                               value="100"
-                               min="1"
-                               max="5000"
-                               step="1"
-                               onkeydown="return event.keyCode !== 69"
-                               style="width: 100%; padding: 15px; background: #2c3136; color: #fff; border: none; border-radius: 4px;">
+                    <div class="calc-input-group">
+                        <label for="depth">ГЛУБИНА (МЕТРЫ):</label>
+                        <input type="number" id="depth" name="depth_val" value="100" min="1" max="5000">
                     </div>
-                    <div style="display: flex; flex-direction: column; justify-content: flex-end;">
-                        <div style="background: var(--accent); padding: 15px; border-radius: 4px; text-align: center;">
-                            <span style="font-size: 0.8rem; text-transform: uppercase; display: block; opacity: 0.8;">Прогноз стоимости:</span>
-                            <strong style="font-size: 1.4rem;"><span id="total-price">0</span> KZT</strong>
+                    <div class="calc-result-container">
+                        <div class="calc-result-badge">
+                            <span class="badge-label">Прогноз стоимости:</span>
+                            <strong class="badge-price"><span id="total-price">0</span> KZT</strong>
                         </div>
                     </div>
                 </div>
-                <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6; text-align: center;">* Данный расчет является предварительным инженерным прогнозом.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <div class="section-header center">
-                <span class="pre-title">Рабочий процесс</span>
-                <h2>АЛГОРИТМ РЕАЛИЗАЦИИ</h2>
-            </div>
-            <div class="steps-grid">
-                <div class="step-item">
-                    <span class="step-num">1</span>
-                    <h4>Анализ</h4>
-                    <p>Технический аудит ТЗ и архивных данных.</p>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">2</span>
-                    <h4>Мобилизация</h4>
-                    <p>Транспортировка буровых комплексов.</p>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">3</span>
-                    <h4>Выполнение</h4>
-                    <p>Бурение и отбор керна по ГОСТ.</p>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">4</span>
-                    <h4>Отчетность</h4>
-                    <p>Передача геологической документации.</p>
-                </div>
+                <p class="calc-disclaimer">* Данный расчет является предварительным инженерным прогнозом.</p>
             </div>
         </div>
     </section>
@@ -170,18 +131,12 @@
 
 <div id="callbackModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" aria-label="Закрыть" tabindex="0">&times;</span>
+        <span class="close-modal">&times;</span>
         <h3>Заявка на расчет</h3>
         <p>Оставьте ваши контакты, и главный инженер перезвонит вам.</p>
         <form id="modalForm">
             <input type="text" name="user_name" placeholder="Ваше имя" required minlength="2">
-            <input type="tel"
-                   name="user_phone"
-                   placeholder="+7 (7xx) xxx-xx-xx"
-                   required
-                   pattern="^(\+7|7|8)?[0-9]{10}$"
-                   inputmode="tel"
-                   title="Введите 10 цифр номера телефона">
+            <input type="tel" name="user_phone" placeholder="+7 (7xx) xxx-xx-xx" required>
             <button type="submit" class="btn btn-primary full-width">ОТПРАВИТЬ ЗАПРОС</button>
         </form>
     </div>
@@ -189,11 +144,9 @@
 
 <footer class="footer">
     <div class="container">
-        <div class="footer-bottom">
-            <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.
-                <i class="fas fa-user-shield" id="admin-login" style="cursor: pointer; opacity: 0.3; margin-left: 10px;" title="Admin Access"></i>
-            </p>
-        </div>
+        <p>&copy; 2026 ТОО "ОВЕРКОМ". БИН: 110940013948. Караганда, Казахстан.
+            <i class="fas fa-user-shield" id="admin-login" style="cursor: pointer; opacity: 0.3; margin-left: 10px;"></i>
+        </p>
     </div>
 </footer>
 

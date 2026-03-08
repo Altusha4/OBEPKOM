@@ -374,3 +374,225 @@ textarea { resize: vertical; min-height: 140px; }
 .text-white { color: #fff !important; }
 .footer { background: #000; color: #555; padding: 50px 0; text-align: center; border-top: 1px solid #111; }
 .footer p { font-size: 0.85rem; letter-spacing: 1px; }
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+}
+@media (max-width: 768px) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 120px 0 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.7);
+        background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+    }
+
+    .hero-content {
+        width: 100%;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        border-left: none;
+        padding-left: 0;
+        margin: 0 auto 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-detail-card {
+        flex-direction: column;
+        padding: 30px 20px !important;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .detail-number {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .detail-icon {
+        margin: 0 auto 15px;
+    }
+
+    .detail-list {
+        text-align: left;
+        display: inline-block;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    #rock-type {
+        padding: 18px 12px !important;
+        font-size: 0.9rem;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 18px;
+    }
+
+    label[for="rock-type"] {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    #rock-type {
+        padding: 12px 35px 12px 10px !important;
+        font-size: 0.85rem !important;
+        white-space: normal;
+        max-width: 100%;
+        line-height: 1.4;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+}
+
+#rock-type {
+    width: 100%;
+    padding: 15px;
+    background: #2c3136;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+}
+
+@media (max-width: 480px) {
+    #rock-type {
+        font-size: 0.8rem !important;
+        padding: 12px 30px 12px 10px !important;
+        white-space: normal;
+    }
+
+    .calculator-result-box {
+        padding: 12px !important;
+    }
+
+    .calculator-result-box strong {
+        font-size: 1.2rem !important;
+    }
+}
+
+.page-header-hero {
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+}
+
+.relative-z { position: relative; z-index: 10; }
+
+.calc-wrapper {
+    background: rgba(255,255,255,0.05);
+    padding: 50px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    align-items: flex-end;
+}
+
+.calc-input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+#rock-type, #depth {
+    width: 100%;
+    padding: 15px;
+    background: #2c3136;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+#rock-type {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+}
+
+.calc-result-badge {
+    background: var(--accent);
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.badge-label { font-size: 0.8rem; text-transform: uppercase; display: block; opacity: 0.8; }
+.badge-price { font-size: 1.4rem; }
+.calc-disclaimer { margin-top: 20px; font-size: 0.8rem; opacity: 0.6; text-align: center; }
+
+@media (max-width: 992px) {
+    .calc-wrapper { padding: 30px 20px; }
+}
+
+@media (max-width: 768px) {
+    .service-detail-card {
+        flex-direction: column !important;
+        text-align: center;
+        padding: 30px 20px !important;
+    }
+    .detail-icon { margin: 0 auto 15px !important; }
+}
+
+@media (max-width: 480px) {
+    #rock-type {
+        font-size: 0.85rem !important;
+        padding-right: 35px !important;
+        white-space: normal !important;
+    }
+    .badge-price { font-size: 1.2rem !important; }
+    .page-header-hero h2 { font-size: 1.8rem !important; }
+}
